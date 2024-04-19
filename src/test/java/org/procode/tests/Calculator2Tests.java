@@ -5,6 +5,8 @@ import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.procode.app.Calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,10 +34,9 @@ public class Calculator2Tests {
 
     @Tag("Apr")
     @DisplayName("ABC-1122 Addition Feature")
-    @Test
-    void testAdd() {
+    void testAdd(double x , double y) {
         // Assertions
-        assertEquals(12, calculator.add(6, 6));
+        assertEquals(12, calculator.add(6,6));
     }
 
     @Tag("Apr")
