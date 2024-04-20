@@ -5,13 +5,17 @@ import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.procode.app.Calculator;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Execution(ExecutionMode.CONCURRENT)
 public class Calculator2Tests {
 
     private static Calculator calculator;
@@ -51,12 +55,13 @@ public class Calculator2Tests {
 
     @Tag("Apr")
     @Test
+    @Timeout(value = 2,unit = TimeUnit.MICROSECONDS)
     void testMul() {
         // Assertions
         assertEquals(36, calculator.mul(6, 6));
     }
 
-    @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_15)
+   // @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_15)
     @Test
     void testDiv() {
         // Assertions
@@ -74,7 +79,7 @@ public class Calculator2Tests {
         System.out.println("Close each resource");
     }*/
 
-    @EnabledOnOs(value = OS.WINDOWS)
+   // @EnabledOnOs(value = OS.WINDOWS)
     @Test
     void testSquareRoot() {
         assertEquals(3, calculator.squareRoot(9));

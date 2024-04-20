@@ -5,13 +5,16 @@ import org.junit.jupiter.api.condition.EnabledForJreRange;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.JRE;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.procode.app.Calculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Execution(ExecutionMode.CONCURRENT)
 public class CalculatorTests {
 
     private static Calculator calculator;
@@ -36,13 +39,15 @@ public class CalculatorTests {
     @DisplayName("ABC-1122 Addition Feature")
     @ParameterizedTest
     @CsvFileSource(resources = "/testData.csv", numLinesToSkip = 1 )
+    @Order(3)
     void testAdd(String x , String y, String s) {
        assertEquals(Double.parseDouble(s),calculator.add(Double.parseDouble(x),Double.parseDouble(y)));
     }
 
-    @Tag    ("Apr")
+    @Tag("Apr")
     @DisplayName("Subtraction Feature")
     @Test
+    @Order(1)
     void testSub() {
         // Assertions
         assertEquals(0, calculator.sub(6, 6));
@@ -51,23 +56,11 @@ public class CalculatorTests {
     }
 
     @Tag("Apr")
-    @Test
+    @Order(4)
+    @RepeatedTest(4)
     void testMul() {
         // Assertions
         assertEquals(36, calculator.mul(6, 6));
-    }
-
-    @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_15)
-    @Test
-    void testDiv() {
-        // Assertions
-        assertEquals(12, calculator.div(48, 4));
-        assertEquals(-16, calculator.div(48, -3));
-
-        Exception ex = assertThrowsExactly(ArithmeticException.class, () -> calculator.div(1, 0));
-
-        assertEquals("Can not divide by zero", ex.getMessage());
-
     }
 
    /* @AfterEach
