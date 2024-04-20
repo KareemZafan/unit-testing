@@ -39,7 +39,7 @@ public class StackTests {
         stack.push(55);
 
         int value= stack.pop();
-        assertEquals(5, value);
+        assertEquals(55, value);
         assertEquals(44,stack.getPeek());
         assertEquals(4, stack.getSize());
         assertEquals(List.of(1, 2, 3,44), stack.getCurrentStack());
