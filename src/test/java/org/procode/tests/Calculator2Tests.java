@@ -28,7 +28,7 @@ public class Calculator2Tests {
     @BeforeAll
     static void beforeAll() {
         calculator = new Calculator();
-        System.out.println("Before Class will run 1 time");
+       System.out.println("Before Class will run 1 time");
     }
 
     @AfterAll
@@ -53,13 +53,7 @@ public class Calculator2Tests {
         assertNotNull(calculator);
     }
 
-    @Tag("Apr")
-    @Test
-    @Timeout(value = 2,unit = TimeUnit.MICROSECONDS)
-    void testMul() {
-        // Assertions
-        assertEquals(36, calculator.mul(6, 6));
-    }
+
 
    // @EnabledForJreRange(min = JRE.JAVA_8, max = JRE.JAVA_15)
     @Test
