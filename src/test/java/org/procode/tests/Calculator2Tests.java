@@ -59,7 +59,7 @@ public class Calculator2Tests {
     @Test
     void testDiv() {
         // Assertions
-        assertEquals(12, calculator.div(48, 5));
+        assertEquals(12, calculator.div(48, 4));
         assertEquals(-16, calculator.div(48, -3));
 
         Exception ex = assertThrowsExactly(ArithmeticException.class, () -> calculator.div(1, 0));
